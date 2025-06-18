@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explore Laptops</title>
+
+  <!-- External Resources -->
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style/laptops.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="script/laptops.js" defer></script>
+</head>
+
+<body>
+  <div id="overlay"></div>
+
+  <div class="main">
+    <!-- Top Buttons -->
+    <div class="buttons">
+      <div>
+        <a href="laptopform.html" class="back-button">
+          <img src="./Image/left-arrow.png" alt="Go Back" />
+        </a>
+      </div>
+
+      <div>
+        <a id="open-filter" class="filter-btn">
+          <img src="./Image/search.gif" alt="Filter" />
+        </a>
+
+        <img src="./Image/add.png" onclick="window.location.href='./laptopform.html'" class="add-button" alt="Add Laptop" />
+
+        <select id="sort-select">
+          <option value="">Sort</option>
+          <option value="price_low">Price: Low to High</option>
+          <option value="price_high">Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Filter Panel -->
+    <div id="filter-panel" class="filter-panel">
+      <button id="close-filter" class="close-btn">×</button>
+      <h2>Filter Laptops</h2>
+
+      <input type="text" id="filter-model" placeholder="Model Name" />
+      <input type="text" id="filter-code" placeholder="Laptop Code" />
+      <input type="text" id="filter-processor" placeholder="Processor" />
+      <input type="text" id="filter-memory" placeholder="Memory" />
+      <input type="text" id="filter-graphicsCard" placeholder="Graphics Card" />
+
+
+      <select id="filter-company">
+        <option value="">Loading companies...</option>
+      </select>
+
+      <select id="filter-status">
+        <option value="">Status</option>
+        <option value="true">Available</option>
+        <option value="false">Unavailable</option>
+      </select>
+
+      <label><input type="radio" name="sort-order" value="asc" checked /> Ascending</label>
+      <label><input type="radio" name="sort-order" value="desc" /> Descending</label>
+
+      <br />
+      <label>Price Range:</label>
+      <input type="range" id="filter-min-price" min="0" max="1000000" step="500" value="0" />
+      <input type="range" id="filter-max-price" min="0" max="1000000" step="500" value="0" />
+
+      <div id="price-display">₹0 - ₹1000000</div>
+
+      <button id="apply-filters" class="apply-btn">Apply Filters</button>
+      <button id="clear-filters" class="clear-btn" style="display: none;">
+        <span class="clear-icon">✖</span> Clear
+      </button>
+    </div>
+
+    <!-- Page Title -->
+    <h1>Explore Laptops</h1>
+
+    <!-- Laptop Results Container -->
+    <div id="result" class="laptop-container"></div>
+
+    <!-- Laptop Details Overlay -->
+    <div id="details-overlay" style="display: none;">
+      <div class="details-content">
+        <button id="close-details" class="close-btn">&times;</button>
+        <div id="details-body"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Laptops</title>
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="style/laptopform.css" />
+  <script defer src="script/laptopform.js"></script>
+</head>
+<body>
+    <div class="main">
+        
+<button type="button" id="laptop-btn">Laptops</button>
+<h1 id="title">Add New Laptop</h1>
+
+  <div class="form-wrapper">
+    <form id="laptopForm">
+      <div class="form-container">
+        <!-- Column 1 -->
+        <div class="form-column">
+          <div class="form-group">
+            <label for="name">Model Name</label>
+            <input type="text" id="name" tabindex="1" />
+            <div class="error-message" id="name-error"></div>
+          </div>
+          <div class="form-group">
+            <label for="cmpny">Company</label>
+            <select id="cmpny" tabindex="3">
+              <option value="" disabled selected>Loading companies...</option>
+            </select>
+            <div class="error-message" id="cmpny-error"></div>
+          </div>
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" id="price" tabindex="5" />
+            <div class="error-message" id="price-error"></div>
+          </div>
+                    <div class="form-group">
+            <label for="graphicsCard">Graphics card</label>
+            <input type="text" id="graphicsCard" tabindex="7" />
+            <div class="error-message" id="graphicsCard-error"></div>
+          </div>
+                    <div class="form-group">
+            <label for="memory">Memory</label>
+            <input type="text" id="memory" tabindex="9" />
+            <div class="error-message" id="memory-error"></div>
+          </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="form-column">
+          <div class="form-group">
+            <label for="lap_code">Laptop Code</label>
+            <input type="text" id="lap_code" tabindex="2"/>
+            <div class="check-message" id="lap_code-check"></div>
+            <div class="error-message" id="lap_code-error"></div>
+          </div>
+          <div class="form-group">
+            <label for="processor">Processor</label>
+            <input type="text" id="processor" tabindex="4" />
+            <div class="error-message" id="processor-error"></div>
+          </div>
+                    <div class="form-group">
+            <label for="display">Display</label>
+            <input type="text" id="display" tabindex="6" />
+            <div class="error-message" id="display-error"></div>
+          </div>
+                    <div class="form-group">
+            <label for="colour">Colour</label>
+            <input type="text" id="colour" tabindex="8" />
+            <div class="error-message" id="colour-error"></div>
+          </div>
+          <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" tabindex="10">
+              <option value="" disabled selected>Select</option>
+              <option value="true">Available</option>
+              <option value="false">Unavailable</option>
+            </select>
+            <div class="error-message" id="status-error"></div>
+          </div>
+        </div>
+      </div>
+
+<div class="button-row">
+  <button id="submit">Submit</button>
+<button id="clear-btn" type="button">
+  <span class="clear-icon">✖</span> Clear
+</button>
+
+
+</div>
+
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>
