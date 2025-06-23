@@ -1,101 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Laptops</title>
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="style/laptopform.css" />
   <script defer src="script/laptopform.js"></script>
 </head>
+
 <body>
-    <div class="main">
-        
-<button type="button" id="laptop-btn">Laptops</button>
-<h1 id="title">Add New Laptop</h1>
+  <div class="main">
 
-  <div class="form-wrapper">
-    <form id="laptopForm">
-      <div class="form-container">
-        <!-- Column 1 -->
-        <div class="form-column">
-          <div class="form-group">
-            <label for="name">Model Name</label>
-            <input type="text" id="name" tabindex="1" />
-            <div class="error-message" id="name-error"></div>
+    <button type="button" id="laptop-btn">Laptops</button>
+    <h1 id="title">Add New Laptop</h1>
+
+    <div class="form-wrapper">
+      <form id="laptopForm">
+        <div class="form-container">
+          <!-- Column 1 -->
+          <div class="form-column">
+            <div class="form-group">
+              <label for="name">Model Name</label>
+              <input type="text" id="name" tabindex="1" />
+              <div class="error-message" id="name-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="cmpny">Company</label>
+              <select id="cmpny" tabindex="3">
+                <option value="" disabled selected>Loading companies...</option>
+              </select>
+              <div class="error-message" id="cmpny-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="price">Price</label>
+              <input type="text" id="price" tabindex="5" />
+              <div class="error-message" id="price-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="graphicsCard">Graphics card</label>
+              <input list="graphicsCardOptions" name="graphics_Card" id="graphicsCard" tabindex="7" />
+              <datalist id="graphicsCardOptions">
+                <option value="NVIDIA GeForce RTX 4090">
+                <option value="NVIDIA GeForce RTX 4080">
+                <option value="NVIDIA GeForce RTX 4070 Ti">
+                <option value="AMD Radeon RX 7900 XTX">
+                <option value="AMD Radeon RX 7800 XT">
+                <option value="AMD Radeon RX 7700 XT">
+                <option value="Intel Arc A770">
+                <option value="Intel Arc A750">
+                <option value="NVIDIA GeForce GTX 1660 Super">
+                <option value="AMD Radeon RX 580">
+              </datalist>
+              <div class="error-message" id="graphicsCard-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="memory">Memory</label>
+              <input list="memoryoptions" name="memory" id="memory" tabindex="9" />
+              <datalist id="memoryoptions">
+                <option value="4GB DDR4">
+                <option value="8GB DDR4">
+                <option value="16GB DDR4">
+                <option value="32GB DDR4">
+                <option value="64GB DDR4">
+                <option value="8GB DDR5">
+                <option value="16GB DDR5">
+                <option value="32GB DDR5">
+                <option value="64GB DDR5">
+                <option value="128GB DDR5">
+              </datalist>
+              <div class="error-message" id="memory-error"></div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="cmpny">Company</label>
-            <select id="cmpny" tabindex="3">
-              <option value="" disabled selected>Loading companies...</option>
-            </select>
-            <div class="error-message" id="cmpny-error"></div>
-          </div>
-          <div class="form-group">
-            <label for="price">Price</label>
-            <input type="text" id="price" tabindex="5" />
-            <div class="error-message" id="price-error"></div>
-          </div>
-                    <div class="form-group">
-            <label for="graphicsCard">Graphics card</label>
-            <input type="text" id="graphicsCard" tabindex="7" />
-            <div class="error-message" id="graphicsCard-error"></div>
-          </div>
-                    <div class="form-group">
-            <label for="memory">Memory</label>
-            <input type="text" id="memory" tabindex="9" />
-            <div class="error-message" id="memory-error"></div>
+
+          <!-- Column 2 -->
+          <div class="form-column">
+            <div class="form-group">
+              <label for="lap_code">Laptop Code</label>
+              <input type="text" id="lap_code" tabindex="2" />
+              <div class="check-message" id="lap_code-check"></div>
+              <div class="error-message" id="lap_code-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="processor">Processor</label>
+              <input list="processoroptions" name="processor" id="processor" tabindex="4" />
+              <datalist id="processoroptions">
+                <option value="Intel Core i3-1315U">
+                <option value="Intel Core i5-1340P">
+                <option value="Intel Core i7-13700H">
+                <option value="Intel Core i9-13980HX">
+                <option value="AMD Ryzen 5 7535U">
+                <option value="AMD Ryzen 7 7735HS">
+                <option value="AMD Ryzen 9 7945HX">
+                <option value="Apple M1">
+                <option value="Apple M2 Pro">
+                <option value="Apple M3 Max">
+              </datalist>
+              <div class="error-message" id="processor-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="display">Display</label>
+              <input list="displayoption" name="display" id="display" tabindex="6" />
+              <datalist id="displayoption">
+                <option value="13.3-inch Full HD (1920x1080)">
+                <option value="14-inch Full HD (1920x1080)">
+                <option value="15.6-inch Full HD (1920x1080)">
+                <option value="16-inch QHD+ (2560x1600)">
+                <option value="17.3-inch Full HD (1920x1080)">
+                <option value="13.6-inch Retina (2560x1664)">
+                <option value="14.2-inch Liquid Retina XDR (3024x1964)">
+                <option value="15.6-inch 4K UHD (3840x2160)">
+                <option value="16-inch OLED 3.2K (3200x2000)">
+                <option value="15.6-inch Full HD 144Hz (1920x1080)">
+              </datalist>
+              <div class="error-message" id="display-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="colour">Colour</label>
+              <input type="text" id="colour" tabindex="8" />
+              <div class="error-message" id="colour-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="status">Status</label>
+              <select id="status" tabindex="10">
+                <option value="" disabled selected>Select</option>
+                <option value="true">Available</option>
+                <option value="false">Unavailable</option>
+              </select>
+              <div class="error-message" id="status-error"></div>
+            </div>
           </div>
         </div>
 
-        <!-- Column 2 -->
-        <div class="form-column">
-          <div class="form-group">
-            <label for="lap_code">Laptop Code</label>
-            <input type="text" id="lap_code" tabindex="2"/>
-            <div class="check-message" id="lap_code-check"></div>
-            <div class="error-message" id="lap_code-error"></div>
-          </div>
-          <div class="form-group">
-            <label for="processor">Processor</label>
-            <input type="text" id="processor" tabindex="4" />
-            <div class="error-message" id="processor-error"></div>
-          </div>
-                    <div class="form-group">
-            <label for="display">Display</label>
-            <input type="text" id="display" tabindex="6" />
-            <div class="error-message" id="display-error"></div>
-          </div>
-                    <div class="form-group">
-            <label for="colour">Colour</label>
-            <input type="text" id="colour" tabindex="8" />
-            <div class="error-message" id="colour-error"></div>
-          </div>
-          <div class="form-group">
-            <label for="status">Status</label>
-            <select id="status" tabindex="10">
-              <option value="" disabled selected>Select</option>
-              <option value="true">Available</option>
-              <option value="false">Unavailable</option>
-            </select>
-            <div class="error-message" id="status-error"></div>
-          </div>
+        <div class="button-row">
+          <button id="submit">Submit</button>
+          <button id="clear-btn" type="button">
+            <span class="clear-icon">✖</span> Clear
+          </button>
+
+
         </div>
-      </div>
 
-<div class="button-row">
-  <button id="submit">Submit</button>
-<button id="clear-btn" type="button">
-  <span class="clear-icon">✖</span> Clear
-</button>
-
-
-</div>
-
-      </div>
+    </div>
     </form>
   </div>
-</div>
+  </div>
 </body>
+
 </html>

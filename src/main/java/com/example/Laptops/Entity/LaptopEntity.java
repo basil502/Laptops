@@ -71,7 +71,6 @@ public class LaptopEntity {
         this.display = display;
     }
 
-
     public String getMemory() {
         return memory;
     }
@@ -79,7 +78,6 @@ public class LaptopEntity {
     public void setMemory(String memory) {
         this.memory = memory;
     }
-
 
     public int getLap_id() {
         return lap_id;

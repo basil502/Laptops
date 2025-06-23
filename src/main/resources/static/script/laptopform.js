@@ -67,8 +67,10 @@ $(document).ready(function () {
     }
   });
 
-  $("input, select").on("input change", function () {
+  $("input, select ").on("input change", function () {
+    const id = $(this).attr("id");
     $(this).removeClass("error");
+    $(`#${id}-error`).text("");
     $(this).next(".error-message").text("");
     toggleClearButton();
   });
@@ -135,10 +137,10 @@ $(document).ready(function () {
     const price = $("#price").val().trim();
     const status = $("#status").val();
     const companyId = $("#cmpny").val();
-    const colour = $("#colour").val();
-    const display = $("#display").val();
-    const memory = $("#memory").val();
-    const graphicsCard = $("#graphicsCard").val();
+    const colour = $("#colour").val().trim();
+    const display = $("#display").val().trim();
+    const memory = $("#memory").val().trim();
+    const graphicsCard = $("#graphicsCard").val().trim();
 
     if (!modelName || !/^[A-Za-z0-9 ]+$/.test(modelName) || modelName.length < 4) {
       $("#name").addClass("error");
@@ -152,7 +154,7 @@ $(document).ready(function () {
       isValid = false;
     }
 
-    if (!processor || !/^[A-Za-z0-9 .\-]+$/.test(processor) || processor.length < 5) {
+    if (!processor || !/^[A-Za-z0-9 . \-]+$/.test(processor) || processor.length < 5) {
       $("#processor").addClass("error");
       $("#processor-error").text("Processor must be at least 5 characters and may contain letters, numbers, dashes, and dots.");
       isValid = false;
@@ -182,19 +184,19 @@ $(document).ready(function () {
       isValid = false;
     }
 
-    if (!memory || !/^[A-Za-z0-9 .:\-]+$/.test(memory) || memory.length < 3) {
+    if (!memory || !/^[A-Za-z0-9 .:x\-]+$/.test(memory) || memory.length < 3) {
       $("#memory").addClass("error");
       $("#memory-error").text("Memory must contain more than 3 characters (letters, numbers, dashes, dots).");
       isValid = false;
     }
 
-    if (!graphicsCard || !/^[A-Za-z0-9 /'"+,.:\-]+$/.test(graphicsCard) || graphicsCard.length < 5) {
+    if (!graphicsCard || !/^[A-Za-z0-9 ()/\-+.,]+$/.test(graphicsCard) || graphicsCard.length < 5) {
       $("#graphicsCard").addClass("error");
       $("#graphicsCard-error").text("Graphics card must be more than 5 characters and valid.");
       isValid = false;
     }
 
-    if (!display || !/^[A-Za-z0-9 /'"+,.:\-]+$/.test(display) || display.length < 5) {
+    if (!display || !/^[A-Za-z0-9 ()/\-'",.+:]+$/.test(display) || display.length < 5) {
       $("#display").addClass("error");
       $("#display-error").text("Display must be more than 5 characters and valid.");
       isValid = false;
@@ -212,7 +214,7 @@ $(document).ready(function () {
       graphicsCard,
       colour,
       display,
-      company: { cmpny_id:(companyId) }
+      company: { cmpny_id: (companyId) }
     };
 
     const url = editId ? `/update/${editId}` : "/add";

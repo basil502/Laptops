@@ -3,7 +3,6 @@ package com.example.Laptops.Controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.Laptops.Entity.CompanyEntity;
 import com.example.Laptops.Entity.LaptopEntity;
-import com.example.Laptops.Repository.CompanyRepository;
 import com.example.Laptops.Service.LaptopService;
 
 @RestController
@@ -20,16 +18,13 @@ public class LaptopController {
     @Autowired
     private LaptopService laptopService;
 
-    @Autowired
-    private CompanyRepository companyRepository;
-
     @PostMapping("/add")
     public ResponseEntity<String> addLaptop(@RequestBody LaptopEntity laptop) {
         return laptopService.saveLaptop(laptop);
     }
 
     @PostMapping("/update/{id}")
-    public Optional<LaptopEntity> updateLaptop(@PathVariable int id, @RequestBody LaptopEntity updateLaptop) {
+    public LaptopEntity updateLaptop(@PathVariable int id, @RequestBody LaptopEntity updateLaptop) {
         return laptopService.updateLaptop(id, updateLaptop);
     }
 

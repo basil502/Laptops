@@ -2,7 +2,6 @@ package com.example.Laptops.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -38,8 +37,10 @@ public class LaptopService {
         return ResponseEntity.ok("Laptop saved successfully");
     }
 
-    public Optional<LaptopEntity> updateLaptop(int id, LaptopEntity updateLaptop) {
-        return laptopRepository.findById(id).map(laptop -> {
+    public LaptopEntity updateLaptop(int id, LaptopEntity updateLaptop) {
+        LaptopEntity laptop = laptopRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Laptop not found with ID: " + id));
+        {
             laptop.setLap_code(updateLaptop.getLap_code());
             laptop.setCompany(updateLaptop.getCompany());
             laptop.setModel_name(updateLaptop.getModel_name());
@@ -52,7 +53,7 @@ public class LaptopService {
             laptop.setGraphicsCard(updateLaptop.getGraphicsCard());
 
             return laptopRepository.save(laptop);
-        });
+        }
     }
 
     public List<CompanyEntity> getAllCompanies() {
@@ -103,7 +104,7 @@ public class LaptopService {
         }
 
         if (memory != null && !(memory = memory.trim()).isEmpty()) {
-            predicates.add(cb.like(cb.lower(root.get("memory")), "%" + memory.toLowerCase() +"%"));
+            predicates.add(cb.like(cb.lower(root.get("memory")), "%" + memory.toLowerCase() + "%"));
         }
 
         if (graphicsCard != null && !(graphicsCard = graphicsCard.trim()).isEmpty()) {
