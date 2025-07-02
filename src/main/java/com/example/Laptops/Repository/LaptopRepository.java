@@ -9,4 +9,5 @@ import com.example.Laptops.Entity.LaptopEntity;
 public interface LaptopRepository extends JpaRepository<LaptopEntity, Integer> {
 
     LaptopEntity findByLapCode(String lapCode);
+
 }

@@ -33,6 +33,47 @@ public class LaptopService {
     private CompanyRepository companyRepository;
 
     public ResponseEntity<String> saveLaptop(LaptopEntity laptop) {
+        if (laptop.getModel_name() == null || laptop.getModel_name().trim().isEmpty()) {
+            throw new IllegalArgumentException("Model Name is required");
+        }
+
+        if (!laptop.getModel_name().matches("^[A-Za-z0-9 ]+$")) {
+            throw new IllegalArgumentException("Model Name should contain only letters, numbers, and spaces");
+        }
+
+        if (laptop.getCompany() == null || laptop.getCompany().getCmpny_id() <= 0) {
+            throw new IllegalArgumentException("Company ID is required");
+        }
+
+        if (!companyRepository.existsById(laptop.getCompany().getCmpny_id())) {
+            throw new IllegalArgumentException("Company ID does not exist");
+        }
+
+        if (!laptop.getLap_code().matches("^[A-Za-z0-9]+$")) {
+            throw new IllegalArgumentException("Laptop code should be alphanumeric without spaces");
+        }
+        if (laptop.getLap_code() == null || laptop.getLap_code().trim().isEmpty()) {
+            throw new IllegalArgumentException("Laptop code is required");
+        }
+
+        if (laptop.getProcessor() == null || laptop.getProcessor().trim().isEmpty()) {
+            throw new IllegalArgumentException("Processor detail is required.");
+        }
+        if (!laptop.getProcessor().matches("^[A-Za-z0-9 .\\-]+$")) {
+            throw new IllegalArgumentException(
+                    "Processor should only contain letters, numbers, spaces, dashes, or dots");
+        }
+
+        if (laptop.getPrice() <= 0) {
+            throw new IllegalArgumentException("Price must be greater than zero.");
+        }
+        if (laptop.getPrice() < 5000) {
+            throw new IllegalArgumentException("Price must be at least 4 digits (₹1000 or more).");
+        }
+        if (laptop.getStatus() == null) {
+            throw new IllegalArgumentException("Status is required (true or false).");
+        }
+
         laptopRepository.save(laptop);
         return ResponseEntity.ok("Laptop saved successfully");
     }
