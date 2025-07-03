@@ -74,7 +74,7 @@ $(document).ready(function () {
     $overlay.addClass("show");
   });
 
-  $("#close-filter, #overlay").click(() => {
+  $("#close-filter").click(() => {
     $panel.removeClass("open");
     $overlay.removeClass("show");
   });
@@ -167,6 +167,7 @@ $(document).ready(function () {
           <p><strong>Display:</strong> ${laptop.display || "N/A"}</p>
           <p><strong>Graphics:</strong> ${laptop.graphicsCard || "N/A"}</p>
           <p><strong>Colour:</strong> ${laptop.colour || "N/A"}</p>
+          ${laptop.status ? `<p><strong>No of Stock:</strong> ${laptop.nostock}</p>` : ""}
           <p class='price'>₹${laptop.price || 0}</p>
           ${laptop.status ? "" : "<p class='status unavailable'>Out of Stock</p>"}
           <div class='actions' style='margin-top:20px;'>
@@ -191,12 +192,7 @@ $(document).ready(function () {
     $(".laptop-container").css("opacity", "1");
   });
 
-  $("#details-overlay").on("click", function (e) {
-    if (!$(e.target).closest(".details-content").length) {
-      $("#details-overlay").fadeOut();
-      $(".laptop-container").css("opacity", "1");
-    }
-  });
+
 
   // 6. EDIT / DELETE ACTIONS
   $(document).on("click", ".edit-btn", function () {

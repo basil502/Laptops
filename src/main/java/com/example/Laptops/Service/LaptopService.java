@@ -92,6 +92,7 @@ public class LaptopService {
             laptop.setMemory(updateLaptop.getMemory());
             laptop.setDisplay(updateLaptop.getDisplay());
             laptop.setGraphicsCard(updateLaptop.getGraphicsCard());
+            laptop.setNostock(updateLaptop.getNostock());
 
             return laptopRepository.save(laptop);
         }

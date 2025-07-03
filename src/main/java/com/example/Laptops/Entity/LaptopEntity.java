@@ -37,6 +37,16 @@ public class LaptopEntity {
 
     @Column(nullable = false)
     private String graphicsCard;
+    @Column(nullable =  true)
+    private String Nostock;
+
+    public String getNostock() {
+        return Nostock;
+    }
+
+    public void setNostock(String nostock) {
+        Nostock = nostock;
+    }
 
     public String getGraphicsCard() {
         return graphicsCard;

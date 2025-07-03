@@ -40,6 +40,14 @@ $(document).ready(function () {
             $("#colour").val(laptop.colour);
             $("#memory").val(laptop.memory);
             $("#graphicsCard").val(laptop.graphicsCard);
+            $("#Nostock").val(laptop.nostock);
+
+            if (String(laptop.status) === "true") {
+              $('#stock-group').show();
+            } else {
+              $('#stock-group').hide();
+              $('#Nostock').val("");
+            }
           },
           error: function () {
             alert("Error loading laptop for edit.");
@@ -52,22 +60,23 @@ $(document).ready(function () {
     }
   });
 
-  // Clear or Cancel
+  // Clear or Cancel button
   $("#clear-btn").click(function () {
     if (editId) {
       localStorage.removeItem("editLaptopId");
       window.location.href = "laptops.html";
     } else {
-      $("#name, #lap_code, #processor, #price, #colour, #display, #memory, #graphicsCard").val("");
+      $("#name, #lap_code, #processor, #price, #colour, #display, #memory, #graphicsCard, #Nostock").val("");
       $("#status, #cmpny").val("");
       $(".error").removeClass("error");
       $(".error-message").text("");
       $("#lap_code-check").text("").removeClass("valid invalid");
+      $("#stock-group").hide();
       toggleClearButton();
     }
   });
 
-  $("input, select ").on("input change", function () {
+  $("input, select").on("input change", function () {
     const id = $(this).attr("id");
     $(this).removeClass("error");
     $(`#${id}-error`).text("");
@@ -92,7 +101,8 @@ $(document).ready(function () {
       $("#clear-btn").text("Clear").toggle(hasInput);
     }
   }
-  //checkLapcode
+
+  // Lap code validation
   $("#lap_code").on("input", function () {
     const code = $(this).val().trim();
     $("#lap_code-error").text("");
@@ -127,6 +137,7 @@ $(document).ready(function () {
     });
   });
 
+  // Submit form
   $("#submit").click(function (e) {
     e.preventDefault();
     let isValid = true;
@@ -141,6 +152,7 @@ $(document).ready(function () {
     const display = $("#display").val().trim();
     const memory = $("#memory").val().trim();
     const graphicsCard = $("#graphicsCard").val().trim();
+    const Nostock = $("#Nostock").val().trim();
 
     if (!modelName || !/^[A-Za-z0-9 ]+$/.test(modelName) || modelName.length < 4) {
       $("#name").addClass("error");
@@ -154,7 +166,7 @@ $(document).ready(function () {
       isValid = false;
     }
 
-    if (!processor || !/^[A-Za-z0-9 . \-]+$/.test(processor) || processor.length < 5) {
+    if (!processor || !/^[A-Za-z0-9 .\-]+$/.test(processor) || processor.length < 5) {
       $("#processor").addClass("error");
       $("#processor-error").text("Processor must be at least 5 characters and may contain letters, numbers, dashes, and dots.");
       isValid = false;
@@ -172,15 +184,27 @@ $(document).ready(function () {
       isValid = false;
     }
 
+    if (status === "true") {
+      if (Nostock === "") {
+        $("#Nostock").addClass("error");
+        $("#Nostock-error").text("No of stock is required when status is Available.");
+        isValid = false;
+      } else if (isNaN(Nostock) || Number(Nostock) < 1 || Number(Nostock) > 100) {
+        $("#Nostock").addClass("error");
+        $("#Nostock-error").text("No of stock must be a number between 1 and 100.");
+        isValid = false;
+      }
+    }
+
     if (!companyId) {
       $("#cmpny").addClass("error");
       $("#cmpny-error").text("Please select a company.");
       isValid = false;
     }
 
-    if (!colour || !/^[A-Za-z ]+$/.test(colour) || colour.length < 4) {
+    if (!colour || !/^[A-Za-z ]+$/.test(colour) || colour.length < 3) {
       $("#colour").addClass("error");
-      $("#colour-error").text("Colour must contain more than 3 letters or spaces.");
+      $("#colour-error").text("Colour must contain more than 2 letters or spaces.");
       isValid = false;
     }
 
@@ -208,14 +232,18 @@ $(document).ready(function () {
       model_name: modelName,
       lap_code: lapCode,
       processor,
-      price: price,
+      price,
       status: status === "true",
       memory,
       graphicsCard,
       colour,
       display,
-      company: { cmpny_id: (companyId) }
+      company: { cmpny_id: companyId }
     };
+
+    if (status === "true") {
+      laptopData.nostock = Nostock;
+    }
 
     const url = editId ? `/update/${editId}` : "/add";
 
@@ -231,9 +259,10 @@ $(document).ready(function () {
         if (editId) {
           window.location.href = "laptops.html";
         } else {
-          $("#name, #lap_code, #processor, #price, #display, #graphicsCard, #memory, #colour").val("");
+          $("#name, #lap_code, #processor, #price, #display, #graphicsCard, #memory, #colour, #Nostock").val("");
           $("#status, #cmpny").val("");
           $("#lap_code-check").text("").removeClass("valid invalid");
+          $("#stock-group").hide();
           toggleClearButton();
         }
       },
@@ -243,9 +272,36 @@ $(document).ready(function () {
     });
   });
 
+  // Back to laptops list
   $("#laptop-btn").click(function (e) {
     e.preventDefault();
     localStorage.removeItem("editLaptopId");
     window.location.href = "laptops.html";
   });
+
+  // Show/hide stock input
+  $('#status').on('change', function () {
+    const selected = $(this).val();
+    if (selected === "true") {
+      $('#stock-group').show();
+    } else {
+      $('#stock-group').hide();
+      $('#Nostock').val("");
+    }
+  });
+$("#increase-stock").click(function () {
+  let current = parseInt($("#Nostock").val()) || 1;
+  if (current < 100) {
+    $("#Nostock").val(current + 1).trigger("input");
+  }
+});
+
+$("#decrease-stock").click(function () {
+  let current = parseInt($("#Nostock").val()) || 1;
+  if (current > 1) {
+    $("#Nostock").val(current - 1).trigger("input");
+  }
+});
+
+
 });

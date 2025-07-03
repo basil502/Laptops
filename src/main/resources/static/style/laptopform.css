@@ -175,3 +175,20 @@ select:focus {
   font-size: 20px;
   line-height: 1;
 }
+
+.stock-control {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.stock-control input[type="number"] {
+  width: 60px;
+  text-align: center;
+}
+.stock-control button {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
